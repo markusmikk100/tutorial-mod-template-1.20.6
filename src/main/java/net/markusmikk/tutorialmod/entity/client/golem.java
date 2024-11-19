@@ -1,10 +1,12 @@
 package net.markusmikk.tutorialmod.entity.client;
 
+import net.markusmikk.tutorialmod.entity.animation.ModAnimations;
 import net.markusmikk.tutorialmod.entity.custom.GolemEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 
 public class golem<T extends GolemEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart magmagolem;
@@ -116,7 +118,20 @@ public class golem<T extends GolemEntity> extends SinglePartEntityModel<T> {
 	}
 	@Override
 	public void setAngles(GolemEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.getPart().traverse().forEach(ModelPart::resetTransform);
+		this.setHeadAngles(netHeadYaw, headPitch);
+
+		this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 2f, 2.5f);
+		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
 	}
+
+	private void setHeadAngles(float headYaw, float headPitch) {
+		headYaw = MathHelper.clamp(headYaw, -30F, 30F);
+		headPitch = MathHelper.clamp(headPitch, -25F, 45F);
+		this.getPart().yaw = headYaw * 0.017453292F;
+		this.getPart().pitch = headPitch * 0.017453292F;
+	}
+
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 		magmagolem.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);

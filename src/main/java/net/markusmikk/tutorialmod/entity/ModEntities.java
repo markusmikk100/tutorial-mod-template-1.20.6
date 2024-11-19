@@ -7,9 +7,12 @@ import net.markusmikk.tutorialmod.entity.custom.GolemEntity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Nullable;
 
 public class ModEntities {
     public  static  final EntityType<GolemEntity> GOLEM = Registry.register(Registries.ENTITY_TYPE,

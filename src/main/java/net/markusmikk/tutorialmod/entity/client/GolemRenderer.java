@@ -9,7 +9,7 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class GolemRenderer extends MobEntityRenderer<GolemEntity, golem<GolemEntity>> {
-    private static  final Identifier TEXTURE = new Identifier(TutorialMod.MOD_ID, "textures/entity/golem.png");
+    private static final Identifier TEXTURE = new Identifier("tutorial_mod", "textures/entity/golem.png");
 
     public GolemRenderer(EntityRendererFactory.Context context) {
         super(context, new golem<>(context.getPart(ModModelLayer.GOLEM)), 0.6f);
@@ -22,7 +22,6 @@ public class GolemRenderer extends MobEntityRenderer<GolemEntity, golem<GolemEnt
 
     @Override
     public void render(GolemEntity mobEntity, float f, float g, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i) {
-
         if (mobEntity.isBaby()) {
             matrixStack.scale(0.5f, 0.5f, 0.5f);
         } else {

@@ -15,5 +15,5 @@ public class ModEntities {
     public  static  final EntityType<GolemEntity> GOLEM = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(TutorialMod.MOD_ID, "golem"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GolemEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f,1f)).build());
+                    .dimensions(EntityDimensions.fixed(3f,3f)).build());  //mob hitbox size
 }

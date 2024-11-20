@@ -25,14 +25,14 @@ import org.jetbrains.annotations.Nullable;
 
 public class GolemEntity extends AnimalEntity {
 
-    public  final AnimationState idleAnimationState = new AnimationState();
-    private  int idleAnimationTimeout = 0;
+    public final AnimationState idleAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
 
-    public GolemEntity(EntityType<? extends  AnimalEntity> entityType, World world) {
+    public GolemEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    private  void  setupAnimationStates() {
+    private void setupAnimationStates() {
         if (this.idleAnimationTimeout <= 0) {
             this.idleAnimationTimeout = this.random.nextInt(40) + 80;
             this.idleAnimationState.start(this.age);
@@ -50,7 +50,7 @@ public class GolemEntity extends AnimalEntity {
     @Override
     public void tick() {
         super.tick();
-        if(this.getWorld().isClient()) {
+        if (this.getWorld().isClient()) {
             setupAnimationStates();
         }
     }
@@ -59,29 +59,23 @@ public class GolemEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1,new AnimalMateGoal(this, 1.150));
-        this.goalSelector.add(2, new TemptGoal(this,1.250, Ingredient.ofItems(Items.BEETROOT), false));
+        this.goalSelector.add(1, new AnimalMateGoal(this, 1.150));
+        this.goalSelector.add(2, new TemptGoal(this, 1.250, Ingredient.ofItems(Items.BEETROOT), false));
 
-        this.goalSelector.add(3,new WanderAroundFarGoal(this, 10));
-        this.goalSelector.add(4,new LookAtEntityGoal(this, PlayerEntity.class, 4));
-        this.goalSelector.add(5,new LookAroundGoal(this));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 10));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4));
+        this.goalSelector.add(5, new LookAroundGoal(this));
 
     }
 
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 75)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.07f)
-                .add(EntityAttributes.GENERIC_ARMOR, 5f)
-                .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15);
+        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 75).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.001f).add(EntityAttributes.GENERIC_ARMOR, 5f).add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15);
     }
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.GOLEM.create(world);
     }
-
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {

@@ -71,7 +71,7 @@ public class GolemEntity extends AnimalEntity {
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 75)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.1f)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.07f)
                 .add(EntityAttributes.GENERIC_ARMOR, 5f)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15);

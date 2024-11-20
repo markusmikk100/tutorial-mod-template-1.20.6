@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
 public class ModAnimations {
 
     public static final Animation WALKING = Animation.Builder.create(3f).looping()
-            .addBoneAnimation("L_arm",
+            .addBoneAnimation("l_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -18,7 +18,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.75f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("L_arm",
+            .addBoneAnimation("l_arm",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -26,7 +26,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.75f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_arm",
+            .addBoneAnimation("r_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -36,7 +36,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(3f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_arm",
+            .addBoneAnimation("r_arm",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(1.25f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -44,7 +44,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(3f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("L_leg",
+            .addBoneAnimation("l_leg",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(1.25f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -52,7 +52,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(3f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("L_leg",
+            .addBoneAnimation("l_leg",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(1.25f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -60,7 +60,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(3f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("L_shoulder",
+            .addBoneAnimation("l_shoulder",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -70,7 +70,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.75f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_leg",
+            .addBoneAnimation("r_leg",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -78,7 +78,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.75f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_leg",
+            .addBoneAnimation("r_leg",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -86,7 +86,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.75f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_shoulder",
+            .addBoneAnimation("r_shoulder",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(1.25f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -97,7 +97,7 @@ public class ModAnimations {
                             new Keyframe(3f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
     public static final Animation ATTACK_L = Animation.Builder.create(1.2083433f)
-            .addBoneAnimation("L_arm",
+            .addBoneAnimation("l_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -107,7 +107,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.2083433f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("L_shoulder",
+            .addBoneAnimation("l_shoulder",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -118,7 +118,7 @@ public class ModAnimations {
                             new Keyframe(1.2083433f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
     public static final Animation ATTACK_R = Animation.Builder.create(1.2083433f)
-            .addBoneAnimation("R_arm",
+            .addBoneAnimation("r_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -128,7 +128,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.2083433f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_shoulder",
+            .addBoneAnimation("r_shoulder",
                     new Transformation(Transformation.Targets.ROTATE,
                             new Keyframe(0f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -138,8 +138,8 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(1.2083433f, AnimationHelper.createRotationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR))).build();
-    public static final Animation IDLE = Animation.Builder.create(3.0834335f).looping()
-            .addBoneAnimation("L_arm",
+    public static final Animation IDLE = Animation.Builder.create(3.0834335f)//.looping()
+            .addBoneAnimation("l_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(0f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),
@@ -147,7 +147,7 @@ public class ModAnimations {
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(2f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("R_arm",
+            .addBoneAnimation("r_arm",
                     new Transformation(Transformation.Targets.TRANSLATE,
                             new Keyframe(1f, AnimationHelper.createTranslationalVector(0f, 0f, 0f),
                                     Transformation.Interpolations.LINEAR),

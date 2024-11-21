@@ -1,6 +1,7 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
 import net.markusmikk.tutorialmod.entity.ModEntities;
+import net.markusmikk.tutorialmod.entity.ai.GolemAttackGoal;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
@@ -27,8 +28,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class GolemEntity extends AnimalEntity {
-    private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(GolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(GolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
 
     public final AnimationState idleAnimationState = new AnimationState();
@@ -49,14 +49,14 @@ public class GolemEntity extends AnimalEntity {
             this.idleAnimationTimeout--;
         }
 
-        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+        if (this.isAttacking() && attackAnimationTimeout <= 0) {
             attackAnimationTimeout = 40;
             attackAnimationState.start(this.age);
         } else {
             --this.attackAnimationTimeout;
         }
 
-        if(!this.isAttacking()) {
+        if (!this.isAttacking()) {
             attackAnimationState.stop();
         }
     }
@@ -79,6 +79,8 @@ public class GolemEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
+        this.goalSelector.add(1, new GolemAttackGoal(this, 1.0D, true));
+
         this.goalSelector.add(1, new AnimalMateGoal(this, 1.150));
         this.goalSelector.add(2, new TemptGoal(this, 1.250, Ingredient.ofItems(Items.BEETROOT), false));
 
@@ -86,13 +88,20 @@ public class GolemEntity extends AnimalEntity {
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4));
         this.goalSelector.add(5, new LookAroundGoal(this));
 
+        this.targetSelector.add(1, new RevengeGoal(this));
     }
 
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
-        return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 75).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.001f).add(EntityAttributes.GENERIC_ARMOR, 5f).add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15);
+        return MobEntity.createMobAttributes()
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
+                .add(EntityAttributes.GENERIC_ARMOR, 5.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 5F)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.8F)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0);
     }
 
-    public  void  setAttacking(boolean attacking) {
+    public void setAttacking(boolean attacking) {
         this.dataTracker.set(ATTACKING, attacking);
     }
 
@@ -101,20 +110,18 @@ public class GolemEntity extends AnimalEntity {
         return this.dataTracker.get(ATTACKING);
     }
 
-//    @Override
-//    protected void initDataTracker() {
-//        this.dataTracker.set(ATTACKING, false);
-//    }
-
-    @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        this.dataTracker.set(ATTACKING, false);}
-
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return ModEntities.GOLEM.create(world);
     }
+
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKING, false);
+    }
+
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {

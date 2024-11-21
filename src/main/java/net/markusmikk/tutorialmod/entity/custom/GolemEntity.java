@@ -10,6 +10,9 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
@@ -24,9 +27,15 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class GolemEntity extends AnimalEntity {
+    private static final TrackedData<Boolean> ATTACKING =
+            DataTracker.registerData(GolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
+
+    public final AnimationState attackAnimationState = new AnimationState();
+    public int attackAnimationTimeout = 0;
 
     public GolemEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -38,6 +47,17 @@ public class GolemEntity extends AnimalEntity {
             this.idleAnimationState.start(this.age);
         } else {
             this.idleAnimationTimeout--;
+        }
+
+        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+            attackAnimationTimeout = 40;
+            attackAnimationState.start(this.age);
+        } else {
+            --this.attackAnimationTimeout;
+        }
+
+        if(!this.isAttacking()) {
+            attackAnimationState.stop();
         }
     }
 
@@ -71,6 +91,25 @@ public class GolemEntity extends AnimalEntity {
     public static DefaultAttributeContainer.Builder createGolemAttributes() {
         return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 75).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.001f).add(EntityAttributes.GENERIC_ARMOR, 5f).add(EntityAttributes.GENERIC_ATTACK_SPEED, 0.1).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 15);
     }
+
+    public  void  setAttacking(boolean attacking) {
+        this.dataTracker.set(ATTACKING, attacking);
+    }
+
+    @Override
+    public boolean isAttacking() {
+        return this.dataTracker.get(ATTACKING);
+    }
+
+//    @Override
+//    protected void initDataTracker() {
+//        this.dataTracker.set(ATTACKING, false);
+//    }
+
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        this.dataTracker.set(ATTACKING, false);}
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {

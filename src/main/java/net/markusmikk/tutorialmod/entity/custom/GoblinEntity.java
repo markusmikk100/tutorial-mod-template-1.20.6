@@ -78,26 +78,29 @@ public class GoblinEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new GoblinAttackGoal(this, movement, false));
+        this.goalSelector.add(1, new GoblinAttackGoal(this, 1, false));
 
         this.goalSelector.add(1, new AnimalMateGoal(this, movement));
-        this.goalSelector.add(2, new TemptGoal(this, movement, Ingredient.ofItems(Items.BEETROOT), false));
+        this.goalSelector.add(2, new TemptGoal(this, movement, Ingredient.ofItems(Items.GOLD_NUGGET), false));
 
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1));
         this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4));
         this.goalSelector.add(5, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new ActiveTargetGoal<>(this, AnimalEntity.class, true));
+
     }
 
     public static DefaultAttributeContainer.Builder createGoblinAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
-                .add(EntityAttributes.GENERIC_ARMOR, 5.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0)
+                .add(EntityAttributes.GENERIC_ARMOR, 0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, movement)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.8F)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 1.0)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0);
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3F)
+                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -124,7 +127,7 @@ public class GoblinEntity extends AnimalEntity {
 
     @Override
     public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.BEETROOT);
+        return stack.isOf(Items.GOLD_NUGGET);
     }
 
     @Override

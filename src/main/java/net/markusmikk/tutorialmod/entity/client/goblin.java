@@ -47,8 +47,8 @@ public class goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
 	private void setHeadAngles(float headYaw, float headPitch) {
 		headYaw = MathHelper.clamp(headYaw, -30F, 30F);
 		headPitch = MathHelper.clamp(headPitch, -25F, 45F);
-		this.getPart().yaw = headYaw * 0.017453292F;
-		this.getPart().pitch = headPitch * 0.017453292F;
+		this.Head.yaw = headYaw * 0.017453292F;
+		this.Head.pitch = headPitch * 0.017453292F;
 	}
 
 	@Override

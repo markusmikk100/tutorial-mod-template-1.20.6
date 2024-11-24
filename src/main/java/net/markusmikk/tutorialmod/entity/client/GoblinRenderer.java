@@ -7,11 +7,11 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
-public class GoblinRenderer extends MobEntityRenderer<GoblinEntity,Goblin<GoblinEntity>> {
-    private static final Identifier TEXTURE = new Identifier("tutorial_mod", "textures/entity/Goblintex.png");
+public class GoblinRenderer extends MobEntityRenderer<GoblinEntity, goblin<GoblinEntity>> {
+    private static final Identifier TEXTURE = new Identifier("tutorial_mod", "textures/entity/goblin.png");
 
     public GoblinRenderer(EntityRendererFactory.Context context) {
-        super(context, new Goblin<>(context.getPart(ModModelLayer.GOBLIN)), 0.6f);
+        super(context, new goblin<>(context.getPart(ModModelLayer.GOBLIN)), 0.3f); //SHADOW
     }
 
     @Override

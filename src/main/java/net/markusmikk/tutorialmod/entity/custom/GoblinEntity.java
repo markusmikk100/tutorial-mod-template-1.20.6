@@ -78,7 +78,7 @@ public class GoblinEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new GoblinAttackGoal(this, movement*2, false));
+        this.goalSelector.add(1, new GoblinAttackGoal(this, movement, false));
 
         this.goalSelector.add(1, new AnimalMateGoal(this, movement));
         this.goalSelector.add(2, new TemptGoal(this, movement, Ingredient.ofItems(Items.BEETROOT), false));

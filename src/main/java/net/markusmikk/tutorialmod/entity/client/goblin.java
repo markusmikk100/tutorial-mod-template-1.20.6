@@ -4,20 +4,17 @@ import net.markusmikk.tutorialmod.entity.animation.ModAnimations;
 import net.markusmikk.tutorialmod.entity.custom.GoblinEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class Goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
-	private final ModelPart Goblin;
+public class goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
+	private final ModelPart goblin;
 	private final ModelPart Head;
 
-	public Goblin(ModelPart root) {
-		this.Goblin = root.getChild("Goblin");
-		this.Head = this.Goblin.getChild("Head");
-
+	public goblin(ModelPart root) {
+		this.goblin = root.getChild("Goblin");
+		this.Head = goblin.getChild("Head");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
@@ -42,9 +39,9 @@ public class Goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(netHeadYaw, headPitch);
 
-		this.animateMovement(ModAnimations.WALKINGG, limbSwing, limbSwingAmount, 3f, 3f);
+		this.animateMovement(ModAnimations.WALKINGG, limbSwing, limbSwingAmount, 1f, 1f);
 		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLEG, ageInTicks, 1f);
-		this.updateAnimation(entity.attackAnimationState, ModAnimations.ATTACKG, ageInTicks, 1f);
+		this.updateAnimation(entity.attackAnimationState, ModAnimations.ATTACKG, ageInTicks, 3f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {
@@ -56,11 +53,11 @@ public class Goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
 
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		Goblin.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+		goblin.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
 	}
 
 	@Override
 	public ModelPart getPart() {
-		return Goblin;
+		return goblin;
 	}
 }

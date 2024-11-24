@@ -8,7 +8,7 @@ import net.minecraft.util.Hand;
 
 public class GoblinAttackGoal extends MeleeAttackGoal {
     private final GoblinEntity entity;
-    private int attackDelay = 24;
+    private int attackDelay = 0;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
 
@@ -20,8 +20,8 @@ public class GoblinAttackGoal extends MeleeAttackGoal {
     @Override
     public void start() {
         super.start();
-        attackDelay = 24;
-        ticksUntilNextAttack = 20;
+        attackDelay = 10;
+//        attackDelay = 24;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GoblinAttackGoal extends MeleeAttackGoal {
     }
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.entity.distanceTo(pEnemy) <= 2f; // TODO
+        return this.entity.distanceTo(pEnemy) <= 2f;
     }
 
     protected void resetAttackCooldown() {

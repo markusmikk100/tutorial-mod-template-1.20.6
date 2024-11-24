@@ -23,7 +23,7 @@ public class ModEntities {
 
 
     public  static  final EntityType<GoblinEntity> GOBLIN = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(TutorialMod.MOD_ID, "Goblin"),
+            new Identifier(TutorialMod.MOD_ID, "goblin"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GoblinEntity::new)
-                    .dimensions(EntityDimensions.fixed(1f,2f)).build());  //mob hitbox size
+                    .dimensions(EntityDimensions.fixed(0.75f,1.5f)).build());  //mob hitbox size
 }

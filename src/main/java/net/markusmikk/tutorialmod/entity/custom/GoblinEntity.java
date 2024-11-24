@@ -1,6 +1,5 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
-import net.markusmikk.tutorialmod.entity.ModEntities;
 import net.markusmikk.tutorialmod.entity.ai.GoblinAttackGoal;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityPose;
@@ -12,20 +11,16 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class GoblinEntity extends AnimalEntity {
+public class GoblinEntity extends HostileEntity {
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(GoblinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private static float movement = 0.3f;
@@ -36,7 +31,7 @@ public class GoblinEntity extends AnimalEntity {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-    public GoblinEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public GoblinEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -80,12 +75,9 @@ public class GoblinEntity extends AnimalEntity {
 
         this.goalSelector.add(1, new GoblinAttackGoal(this, 1, false));
 
-        this.goalSelector.add(1, new AnimalMateGoal(this, movement));
-        this.goalSelector.add(2, new TemptGoal(this, movement, Ingredient.ofItems(Items.GOLD_NUGGET), false));
-
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1));
-        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 4));
-        this.goalSelector.add(5, new LookAroundGoal(this));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1));
+        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 4));
+        this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
@@ -112,22 +104,11 @@ public class GoblinEntity extends AnimalEntity {
         return this.dataTracker.get(ATTACKING);
     }
 
-    @Override
-    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.GOBLIN.create(world);
-    }
-
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
-    }
-
-
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return stack.isOf(Items.GOLD_NUGGET);
     }
 
     @Override

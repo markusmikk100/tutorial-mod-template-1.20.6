@@ -20,8 +20,12 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
+
 public class GoblinEntity extends HostileEntity {
     private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(GoblinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    private final Random random = new Random();
 
     private static float movement = 0.3f;
 
@@ -44,7 +48,7 @@ public class GoblinEntity extends HostileEntity {
         }
 
         if (this.isAttacking() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 40;
+            attackAnimationTimeout = 10;  //....................................................................
             attackAnimationState.start(this.age);
         } else {
             --this.attackAnimationTimeout;
@@ -91,7 +95,6 @@ public class GoblinEntity extends HostileEntity {
                 .add(EntityAttributes.GENERIC_ARMOR, 0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, movement)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3F)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, 0.4)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0);
     }
 
@@ -110,6 +113,7 @@ public class GoblinEntity extends HostileEntity {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
     }
+
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {

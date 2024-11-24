@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRe
 import net.markusmikk.tutorialmod.entity.ModEntities;
 import net.markusmikk.tutorialmod.entity.custom.GoblinEntity;
 import net.markusmikk.tutorialmod.entity.custom.GolemEntity;
+import net.markusmikk.tutorialmod.sound.ModSounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,6 +21,8 @@ public class TutorialMod implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.GOLEM, GolemEntity.createGolemAttributes());
 
 		FabricDefaultAttributeRegistry.register(ModEntities.GOBLIN, GoblinEntity.createGoblinAttributes());
+
+		ModSounds.registerSounds();
 
 	}
 }

@@ -3,6 +3,7 @@ package net.markusmikk.tutorialmod.entity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityType;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.markusmikk.tutorialmod.TutorialMod;
+import net.markusmikk.tutorialmod.entity.custom.GoblinEntity;
 import net.markusmikk.tutorialmod.entity.custom.GolemEntity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -19,4 +20,10 @@ public class ModEntities {
             new Identifier(TutorialMod.MOD_ID, "golem"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GolemEntity::new)
                     .dimensions(EntityDimensions.fixed(3f,3f)).build());  //mob hitbox size
+
+
+    public  static  final EntityType<GoblinEntity> GOBLIN = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(TutorialMod.MOD_ID, "Goblin"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, GoblinEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f,2f)).build());  //mob hitbox size
 }

@@ -88,7 +88,7 @@ public class golem<T extends GolemEntity> extends SinglePartEntityModel<T> {
                 .uv(0, 104).cuboid(-4.0F, -1.0F, -19.0F, 23.0F, 15.0F, 18.0F, new Dilation(0.0F))
                 .uv(162, 188).cuboid(14.0F, 0.0F, -31.0F, 11.0F, 12.0F, 17.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.3491F, 0.0F, 0.0F));
 
-        ModelPartData r_leg = MagmaGolem.addChild("R_leg", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, -21.0F, 32.0F));
+        ModelPartData r_leg = MagmaGolem.addChild("r_leg", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, -21.0F, 32.0F));
 
         ModelPartData cube_r4 = r_leg.addChild("cube_r4", ModelPartBuilder.create().uv(56, 197).cuboid(-15.0F, -5.5168F, -4.3971F, 13.0F, 17.0F, 13.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, -0.1745F, 0.0F, 0.0F));
 
@@ -109,7 +109,7 @@ public class golem<T extends GolemEntity> extends SinglePartEntityModel<T> {
                 .uv(240, 245).cuboid(-4.0F, -1.0F, 30.0F, 9.0F, 12.0F, 8.0F, new Dilation(0.0F))
                 .uv(92, 246).cuboid(-13.0F, -1.0F, 30.0F, 9.0F, 12.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(4.0F, 0.0F, -5.0F, -0.5672F, 0.0F, 0.0F));
 
-        ModelPartData r_shoulder = MagmaGolem.addChild("R_shoulder", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, -36.0F, 15.0F));
+        ModelPartData r_shoulder = MagmaGolem.addChild("r_shoulder", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, -36.0F, 15.0F));
 
         ModelPartData cube_r9 = r_shoulder.addChild("cube_r9", ModelPartBuilder.create().uv(252, 44).cuboid(-15.0F, 1.0F, -20.0F, 19.0F, 10.0F, 1.0F, new Dilation(0.0F))
                 .uv(0, 197).cuboid(-25.0F, 0.0F, -31.0F, 11.0F, 12.0F, 17.0F, new Dilation(0.0F))

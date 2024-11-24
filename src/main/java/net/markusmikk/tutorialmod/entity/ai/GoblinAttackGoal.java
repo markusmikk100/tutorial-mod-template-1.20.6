@@ -1,20 +1,20 @@
 package net.markusmikk.tutorialmod.entity.ai;
 
-import net.markusmikk.tutorialmod.entity.custom.GolemEntity;
+import net.markusmikk.tutorialmod.entity.custom.GoblinEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
 
-public class GolemAttackGoal extends MeleeAttackGoal {
-    private final GolemEntity entity;
+public class GoblinAttackGoal extends MeleeAttackGoal {
+    private final GoblinEntity entity;
     private int attackDelay = 24;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
 
-    public GolemAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
+    public GoblinAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
-        entity = ((GolemEntity) mob);
+        entity = ((GoblinEntity) mob);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class GolemAttackGoal extends MeleeAttackGoal {
     }
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.entity.distanceTo(pEnemy) <= 4f; // TODO
+        return this.entity.distanceTo(pEnemy) <= 2f; // TODO
     }
 
     protected void resetAttackCooldown() {

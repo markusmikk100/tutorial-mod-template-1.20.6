@@ -1,14 +1,12 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
 import net.markusmikk.tutorialmod.entity.ModEntities;
-import net.markusmikk.tutorialmod.entity.ai.GolemAttackGoal;
+import net.markusmikk.tutorialmod.entity.ai.GoblinAttackGoal;
 import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
@@ -27,8 +25,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class GolemEntity extends AnimalEntity {
-    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(GolemEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+public class GoblinEntity extends AnimalEntity {
+    private static final TrackedData<Boolean> ATTACKING = DataTracker.registerData(GoblinEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private static float movement = 0.3f;
 
@@ -38,7 +36,7 @@ public class GolemEntity extends AnimalEntity {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
 
-    public GolemEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public GoblinEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -80,7 +78,7 @@ public class GolemEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new GolemAttackGoal(this, movement*2, false));
+        this.goalSelector.add(1, new GoblinAttackGoal(this, movement*2, false));
 
         this.goalSelector.add(1, new AnimalMateGoal(this, movement));
         this.goalSelector.add(2, new TemptGoal(this, movement, Ingredient.ofItems(Items.BEETROOT), false));
@@ -92,7 +90,7 @@ public class GolemEntity extends AnimalEntity {
         this.targetSelector.add(1, new RevengeGoal(this));
     }
 
-    public static DefaultAttributeContainer.Builder createGolemAttributes() {
+    public static DefaultAttributeContainer.Builder createGoblinAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 50.0)
                 .add(EntityAttributes.GENERIC_ARMOR, 5.0)
@@ -113,7 +111,7 @@ public class GolemEntity extends AnimalEntity {
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.GOLEM.create(world);
+        return ModEntities.GOBLIN.create(world);
     }
 
 

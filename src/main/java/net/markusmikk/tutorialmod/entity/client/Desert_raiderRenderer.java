@@ -11,7 +11,7 @@ public class Desert_raiderRenderer extends MobEntityRenderer<Desert_raiderEntity
     private static final Identifier TEXTURE = new Identifier("tutorial_mod", "textures/entity/desert_raider.png");
 
     public Desert_raiderRenderer(EntityRendererFactory.Context context) {
-        super(context, new desertRaider<>(context.getPart(ModModelLayer.DESERT_RAIDER)), 0.3f); //SHADOW
+        super(context, new desertRaider<>(context.getPart(ModModelLayer.DESERT_RAIDER)), 1f); //SHADOW
     }
 
     @Override

@@ -1,7 +1,6 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
 import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
-import net.markusmikk.tutorialmod.entity.ai.GoblinAttackGoal;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -14,7 +13,6 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -28,7 +26,7 @@ public class Desert_raiderEntity extends HostileEntity {
 
     private final Random random = new Random();
 
-    private static float movement = 0.3f;
+    private static float movement = 0.25f;
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -86,18 +84,16 @@ public class Desert_raiderEntity extends HostileEntity {
         this.goalSelector.add(4, new LookAroundGoal(this));
 
         this.targetSelector.add(1, new RevengeGoal(this));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, AnimalEntity.class, true));
 
     }
 
     public static DefaultAttributeContainer.Builder createDesert_raiderAttributes() {
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 15.0)
-                .add(EntityAttributes.GENERIC_ARMOR, 0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
+                .add(EntityAttributes.GENERIC_ARMOR, 5)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, movement)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 4.0);
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0);
     }
 
     public void setAttacking(boolean attacking) {

@@ -1,5 +1,6 @@
 package net.markusmikk.tutorialmod.entity.client;
 
+import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
 import net.markusmikk.tutorialmod.entity.animation.ModAnimations;
 import net.markusmikk.tutorialmod.entity.custom.Desert_raiderEntity;
 import net.minecraft.client.model.*;
@@ -71,14 +72,20 @@ public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntit
 		ModelPartData r_leg = Raider.addChild("r_leg", ModelPartBuilder.create().uv(19, 73).cuboid(-2.0F, 0.0F, -1.0F, 4.0F, 12.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(-2.0F, -12.0F, 0.0F));
 		return TexturedModelData.of(modelData, 128, 128);
 	}
+
+
 	@Override
 	public void setAngles(Desert_raiderEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(netHeadYaw, headPitch);
 
+
 		this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 1f, 1f);
-		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
-		this.updateAnimation(entity.attackAnimationState, ModAnimations.STAB, ageInTicks, 1f);
+
+
+			this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
+		//	this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE2, ageInTicks, 1f);
+			this.updateAnimation(entity.attackAnimationState, ModAnimations.STAB, ageInTicks, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

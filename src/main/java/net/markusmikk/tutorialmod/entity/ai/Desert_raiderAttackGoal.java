@@ -5,6 +5,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
+import net.markusmikk.tutorialmod.entity.client.desertRaider;
 
 public class Desert_raiderAttackGoal extends MeleeAttackGoal {
     private final Desert_raiderEntity entity;

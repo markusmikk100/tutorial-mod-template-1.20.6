@@ -42,6 +42,7 @@ public class goblin<T extends GoblinEntity> extends SinglePartEntityModel<T> {
 		this.animateMovement(ModAnimations.WALKINGGOBLIN, limbSwing, limbSwingAmount, 1f, 1f);
 		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLEGOBLIN, ageInTicks, 1f);
 		this.updateAnimation(entity.attackAnimationState, ModAnimations.ATTACKGG, ageInTicks, 3f);
+
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

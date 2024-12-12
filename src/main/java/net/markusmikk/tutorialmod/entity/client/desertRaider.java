@@ -14,7 +14,7 @@ public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntit
 
 	public desertRaider(ModelPart root) {
 		this.Raider = root.getChild("Raider");
-		this.Head = Raider.getChild("Raider").getChild("upper_body").getChild("Head");
+		this.Head = Raider.getChild("upper_body").getChild("Head");
 
 	}
 	public static TexturedModelData getTexturedModelData() {

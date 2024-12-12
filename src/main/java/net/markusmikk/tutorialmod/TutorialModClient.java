@@ -4,11 +4,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.markusmikk.tutorialmod.entity.ModEntities;
-import net.markusmikk.tutorialmod.entity.client.GoblinRenderer;
-import net.markusmikk.tutorialmod.entity.client.golem;
-import net.markusmikk.tutorialmod.entity.client.goblin;
-import net.markusmikk.tutorialmod.entity.client.GolemRenderer;
-import net.markusmikk.tutorialmod.entity.client.ModModelLayer;
+import net.markusmikk.tutorialmod.entity.client.*;
 
 public class TutorialModClient implements ClientModInitializer {
     @Override
@@ -19,5 +15,8 @@ public class TutorialModClient implements ClientModInitializer {
 
         EntityRendererRegistry.register(ModEntities.GOBLIN, GoblinRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayer.GOBLIN, goblin::getTexturedModelData);
+
+        EntityRendererRegistry.register(ModEntities.Desert_raider, Desert_raiderRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayer.DESERT_RAIDER, desertRaider::getTexturedModelData);
     }
 }

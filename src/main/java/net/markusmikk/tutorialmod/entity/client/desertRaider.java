@@ -76,9 +76,9 @@ public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntit
 		this.getPart().traverse().forEach(ModelPart::resetTransform);
 		this.setHeadAngles(netHeadYaw, headPitch);
 
-		this.animateMovement(ModAnimations.WALKINGG, limbSwing, limbSwingAmount, 1f, 1f);
-		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLEG, ageInTicks, 1f);
-		this.updateAnimation(entity.attackAnimationState, ModAnimations.ATTACKG, ageInTicks, 3f);
+		this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 1f, 1f);
+		this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
+		this.updateAnimation(entity.attackAnimationState, ModAnimations.STAB, ageInTicks, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

@@ -1,5 +1,6 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
+import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
 import net.markusmikk.tutorialmod.entity.ai.GoblinAttackGoal;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityPose;
@@ -76,6 +77,8 @@ public class Desert_raiderEntity extends HostileEntity {
     @Override
     protected void initGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
+
+        this.goalSelector.add(1, new Desert_raiderAttackGoal(this, 1, false));
 
 
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1));

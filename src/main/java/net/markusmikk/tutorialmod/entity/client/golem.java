@@ -123,8 +123,8 @@ public class golem<T extends GolemEntity> extends SinglePartEntityModel<T> {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(netHeadYaw, headPitch);
 
-        this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 3f, 3f);
-        this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
+        this.animateMovement(ModAnimations.WALKINGGOLEM, limbSwing, limbSwingAmount, 3f, 3f);
+        this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLEGOLEM, ageInTicks, 1f);
         this.updateAnimation(entity.attackAnimationState, ModAnimations.ATTACK_L, ageInTicks, 1f);
     }
 

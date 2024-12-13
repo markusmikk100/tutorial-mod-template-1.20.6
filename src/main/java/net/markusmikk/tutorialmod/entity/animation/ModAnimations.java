@@ -819,17 +819,11 @@ public class ModAnimations {
     public static final Animation STAB = Animation.Builder.create(0.16766666f)
             .addBoneAnimation("Sword",
                     new Transformation(Transformation.Targets.TRANSLATE,
-                            new Keyframe(0f, AnimationHelper.createTranslationalVector(11f, -13f, -5f),
+                            new Keyframe(0f, AnimationHelper.createTranslationalVector(11f, 0f, -5f),
                                     Transformation.Interpolations.LINEAR),
                             new Keyframe(0.08343333f, AnimationHelper.createTranslationalVector(11f, -7.5f, -11.5f),
                                     Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.16766666f, AnimationHelper.createTranslationalVector(11f, -13f, -5f),
-                                    Transformation.Interpolations.LINEAR)))
-            .addBoneAnimation("Sword",
-                    new Transformation(Transformation.Targets.ROTATE,
-                            new Keyframe(0f, AnimationHelper.createRotationalVector(-289.63f, -95.86f, 358.98f),
-                                    Transformation.Interpolations.LINEAR),
-                            new Keyframe(0.16766666f, AnimationHelper.createRotationalVector(-289.63f, -95.86f, 358.98f),
+                            new Keyframe(0.16766666f, AnimationHelper.createTranslationalVector(0f, -13f, -5f),
                                     Transformation.Interpolations.LINEAR)))
             .addBoneAnimation("l_arm",
                     new Transformation(Transformation.Targets.ROTATE,

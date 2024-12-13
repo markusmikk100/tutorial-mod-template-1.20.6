@@ -85,13 +85,14 @@ public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntit
 
 		this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 1f, 1f);
 
-		if (Desert_raiderAttackGoal == true) {
-			this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
+		if (entity.hasTakenDamage()) {
+
+			this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE2, ageInTicks, 1f);
 
 				MinecraftClient.getInstance().player.sendMessage(Text.of("The Desert Raider is attacking!"), true);
 
 			} else{
-				this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE2, ageInTicks, 1f);
+				this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
 
 			MinecraftClient.getInstance().player.sendMessage(Text.of("The Desert Raider is not attacking!"), true);
 

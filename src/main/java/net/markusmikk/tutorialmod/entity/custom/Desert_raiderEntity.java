@@ -1,5 +1,6 @@
 package net.markusmikk.tutorialmod.entity.custom;
 
+import jdk.jfr.Event;
 import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityPose;
@@ -7,6 +8,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -14,9 +18,13 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
@@ -26,6 +34,67 @@ public class Desert_raiderEntity extends HostileEntity {
 
     private final Random random = new Random();
 
+//----------------------DAMAGE------------------------------------
+    private boolean recentlyDamaged = false;
+
+    // Call this method whenever the entity takes damage
+    @Override
+    public boolean damage(DamageSource source, float amount) {
+        boolean result = super.damage(source, amount);
+
+        // Set the recently damaged flag to true
+        recentlyDamaged = true;
+
+        // Optionally reset the flag after some time if you only want to play the animation for a short time
+        // You can use a cooldown timer or check the ageInTicks to reset it
+        return result;
+    }
+
+    public boolean hasTakenDamage() {
+        return recentlyDamaged;
+    }
+
+    // Reset the flag in the tick or update method to stop playing the damage animation
+    public void resetDamageFlag() {
+        recentlyDamaged = false;
+    }
+
+//----------------------------BOSS BAR---------------------------------------
+
+    private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(this.getDisplayName(), BossBar.Color.YELLOW, BossBar.Style.PROGRESS).setDarkenSky(true).setThickenFog(true);
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        if (this.hasCustomName()) {
+            this.bossBar.setName(this.getDisplayName());
+        }
+    }
+
+    @Override
+    public void setCustomName(@Nullable Text name) {
+        super.setCustomName(name);
+        this.bossBar.setName(this.getDisplayName());
+    }
+
+    @Override
+    public void onStartedTrackingBy(ServerPlayerEntity player) {
+        this.bossBar.addPlayer(player);
+    }
+
+    @Override
+    public void onStoppedTrackingBy(ServerPlayerEntity player) {
+        super.onStoppedTrackingBy(player);
+        this.bossBar.removePlayer(player);
+    }
+
+    @Override
+    protected void mobTick() {
+        this.bossBar.setPercent(this.getHealth() / this.getMaxHealth());
+    }
+
+
+    //----------------------------------------------------------------------------------
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 

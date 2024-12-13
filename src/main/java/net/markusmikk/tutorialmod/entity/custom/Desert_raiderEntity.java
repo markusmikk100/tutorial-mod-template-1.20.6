@@ -26,8 +26,6 @@ public class Desert_raiderEntity extends HostileEntity {
 
     private final Random random = new Random();
 
-    private static float movement = 0.25f;
-
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
@@ -88,12 +86,13 @@ public class Desert_raiderEntity extends HostileEntity {
     }
 
     public static DefaultAttributeContainer.Builder createDesert_raiderAttributes() {
+        float movement = 0.2f;
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
                 .add(EntityAttributes.GENERIC_ARMOR, 5)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, movement)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 10.0);
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0);
     }
 
     public void setAttacking(boolean attacking) {

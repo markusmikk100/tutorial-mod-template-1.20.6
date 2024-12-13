@@ -3,10 +3,13 @@ package net.markusmikk.tutorialmod.entity.client;
 import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
 import net.markusmikk.tutorialmod.entity.animation.ModAnimations;
 import net.markusmikk.tutorialmod.entity.custom.Desert_raiderEntity;
+import net.markusmikk.tutorialmod.entity.ai.Desert_raiderAttackGoal;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 
 public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntityModel<T> {
@@ -82,9 +85,17 @@ public class desertRaider<T extends Desert_raiderEntity> extends SinglePartEntit
 
 		this.animateMovement(ModAnimations.WALKING, limbSwing, limbSwingAmount, 1f, 1f);
 
-
+		if (Desert_raiderAttackGoal == true) {
 			this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE, ageInTicks, 1f);
-		//	this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE2, ageInTicks, 1f);
+
+				MinecraftClient.getInstance().player.sendMessage(Text.of("The Desert Raider is attacking!"), true);
+
+			} else{
+				this.updateAnimation(entity.idleAnimationState, ModAnimations.IDLE2, ageInTicks, 1f);
+
+			MinecraftClient.getInstance().player.sendMessage(Text.of("The Desert Raider is not attacking!"), true);
+
+		}
 			this.updateAnimation(entity.attackAnimationState, ModAnimations.STAB, ageInTicks, 1f);
 	}
 

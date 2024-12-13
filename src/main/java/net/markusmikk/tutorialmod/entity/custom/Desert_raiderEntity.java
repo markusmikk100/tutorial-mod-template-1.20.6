@@ -42,6 +42,16 @@ public class Desert_raiderEntity extends HostileEntity {
     public boolean damage(DamageSource source, float amount) {
         boolean result = super.damage(source, amount);
 
+        if (source.getAttacker() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) source.getAttacker();
+
+            // Ensure the player is a server player before adding to the boss bar
+            if (player instanceof ServerPlayerEntity) {
+                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+                this.bossBar.addPlayer(serverPlayer);
+            }
+        }
+
         // Set the recently damaged flag to true
         recentlyDamaged = true;
 
@@ -61,26 +71,12 @@ public class Desert_raiderEntity extends HostileEntity {
 
 //----------------------------BOSS BAR---------------------------------------
 
-    private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(this.getDisplayName(), BossBar.Color.YELLOW, BossBar.Style.PROGRESS).setDarkenSky(true).setThickenFog(true);
+    private final ServerBossBar bossBar = (ServerBossBar)new ServerBossBar(Text.of(""), BossBar.Color.YELLOW, BossBar.Style.PROGRESS).setDarkenSky(true).setThickenFog(true);
 
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        if (this.hasCustomName()) {
-            this.bossBar.setName(this.getDisplayName());
-        }
-    }
-
-    @Override
-    public void setCustomName(@Nullable Text name) {
-        super.setCustomName(name);
-        this.bossBar.setName(this.getDisplayName());
-    }
-
-    @Override
-    public void onStartedTrackingBy(ServerPlayerEntity player) {
-        this.bossBar.addPlayer(player);
-    }
+//    @Override
+//    public void onStartedTrackingBy(ServerPlayerEntity player) {
+//        this.bossBar.addPlayer(player);
+//    }
 
     @Override
     public void onStoppedTrackingBy(ServerPlayerEntity player) {
@@ -157,8 +153,8 @@ public class Desert_raiderEntity extends HostileEntity {
     public static DefaultAttributeContainer.Builder createDesert_raiderAttributes() {
         float movement = 0.2f;
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 40)
-                .add(EntityAttributes.GENERIC_ARMOR, 5)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 400)
+                .add(EntityAttributes.GENERIC_ARMOR, 15)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, movement)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 10F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0);
